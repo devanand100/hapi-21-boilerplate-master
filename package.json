@@ -1,0 +1,106 @@
+{
+  "name": "hapi-18-boilerplate",
+  "version": "1.0.0",
+  "description": "Hapi 18 Boilerplate",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run start:local",
+    "start:local": "cross-env NODE_ENV=default nodemon server.js",
+    "start:dev": "cross-env NODE_ENV=development node server.js --development",
+    "start:prod": "cross-env NODE_ENV=production node server.js --prod",
+    "seed:local": "cross-env NODE_ENV=default md-seed run",
+    "seed:dev": "cross-env NODE_ENV=development md-seed run --development",
+    "seed:prod": "cross-env NODE_ENV=production md-seed run --prod",
+    "test": "jest --coverage",
+    "precommit": "lint-staged",
+    "md-seed": "md-seed",
+    "lint": "eslint --fix './**/*.js' ./"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=8.10.0",
+    "npm": ">=3.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patelmayankce/hapi-18-boilerplate.git"
+  },
+  "keywords": [
+    "hapi",
+    "hapi18",
+    "boilerplate",
+    "starter-kit",
+    "hapi-boilerplate"
+  ],
+  "author": "Mayank Patel <patelmayankce@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patelmayankce/hapi-18-boilerplate/issues"
+  },
+  "homepage": "https://github.com/patelmayankce/hapi-18-boilerplate#readme",
+  "dependencies": {
+    "@hapi/basic": "^7.0.2",
+    "@hapi/boom": "^10.0.1",
+    "@hapi/glue": "^9.0.1",
+    "@hapi/good": "^9.0.1",
+    "@hapi/good-console": "^9.0.1",
+    "@hapi/good-squeeze": "^6.0.0",
+    "@hapi/hapi": "^20.3.0",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.3",
+    "@hapipal/schmervice": "^3.0.0",
+    "@sideway/address": "^5.0.0",
+    "bcrypt": "^5.1.1",
+    "bluebird": "^3.7.2",
+    "config": "^3.3.9",
+    "glob": "^10.3.10",
+    "hapi-auth-jwt2": "^10.4.0",
+    "hapi-dev-errors": "^4.0.0",
+    "hapi-swagger": "^17.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "luxon": "^3.4.3",
+    "module-alias": "^2.2.3",
+    "mongoose": "^7.6.3",
+    "mongoose-data-seed": "^2.1.6",
+    "mongoose-deep-populate": "^3.2.0",
+    "mrhorse": "^7.0.2",
+    "satelize": "^0.1.2",
+    "uuid": "^9.0.1",
+    "zxcvbn": "^4.4.2"
+  },
+  "_moduleAliases": {
+    "root": ".",
+    "models": "server/models",
+    "plugins": "server/plugins",
+    "routes": "server/routes",
+    "utilities": "server/utilities",
+    "policies": "server/policies",
+    "services": "server/services",
+    "api": "server/api"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier-standard": "^4.0.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.0.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "rewire": "^7.0.0"
+  }
+}
