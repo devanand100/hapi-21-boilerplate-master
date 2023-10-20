@@ -2,8 +2,7 @@
 
 const db = require('mongoose');
 const Glob = require('glob');
-const Bluebird = require('bluebird'); // You need to import Bluebird
-const { MongoClient } = require("mongodb");
+const Bluebird = require('bluebird'); 
 
 db.Promise = Bluebird;
 
@@ -17,50 +16,45 @@ module.exports.plugin = {
   async register(server, options) {
     try {
       
-      
-      // const Conn =  new MongoClient(options.connections.db);
-      // const urlArray = options.connections.db.split('/')
-      
-      
-      // // getting database from databse url
-      // dbConn =  Conn.db(urlArray[urlArray.length - 1])
-      
-      // // When the connection is connected
-      // Conn.on('connected', () => {
-      //   server.log(['mongoose', 'info'], 'Mongo Database connected');
-      // });
+      dbConn = await db.createConnection(options.connections.db).asPromise()
+
     
-      // // When the connection is disconnected
-      // Conn.on('disconnected', () => {
-      //   server.log(['mongoose', 'info'], 'Mongo Database disconnected');
-      // });
+      // When the connection is connected
+      dbConn.on('connected', () => {
+        server.log(['mongoose', 'info'], 'Mongo Database connected');
+      });
+    
+      // When the connection is disconnected
+      dbConn.on('disconnected', () => {
+        server.log(['mongoose', 'info'], 'Mongo Database disconnected');
+      });
     
 
-      // // If the node process ends, close the mongoose connection
-      // process.on('SIGINT', async () => {
-      //   try {
-      //     await Conn.close();
+      // If the node process ends, close the mongoose connection
+      process.on('SIGINT', async () => {
+        try {
+          await dbConn.close();
           
-      //     server.log(
-      //       ['mongoose', 'info'],
-      //       'Mongo Database disconnected through app termination'
-      //     );
-      //   } catch (err) {
-      //     server.log(
-      //       ['mongoose', 'error'],
-      //       'Error while disconnecting MongoDB: ' + err
-      //     );
-      //   }
-      //   process.exit(0);
-      // });
+          server.log(
+            ['mongoose', 'info'],
+            'Mongo Database disconnected through app termination'
+          );
+        } catch (err) {
+          server.log(
+            ['mongoose', 'error'],
+            'Error while disconnecting MongoDB: ' + err
+          );
+        }
+        process.exit(0);
+      });
 
-      // // Load models
-      // const models = Glob.sync('server/models/*.js');
+      // Load models
+      const models = Glob.sync('server/models/*.js');
      
       
-      // models.forEach((model) => {
-      //   require(`${process.cwd()}/${model}`);
-      // });
+      models.forEach((model) => {
+        require(`${process.cwd()}/${model}`);
+      });
     } catch (err) {
       server.log(['mongoose', 'error'], 'Error during MongoDB setup: ' + err);
       throw err;

@@ -155,7 +155,7 @@ module.exports.manifest = {
     routes: {
       security: {
         hsts: false,
-        xss: true,
+        xss: "enabled",
         noOpen: true,
         noSniff: true,
         xframe: false,
@@ -174,7 +174,7 @@ module.exports.manifest = {
           throw err;
         },
       },
-      jsonp: 'callback', // <3 Hapi,
+      // jsonp: 'callback', // <3 Hapi,
       auth: false, // remove this to enable authentication or set your authentication profile ie. auth: 'jwt'
     },
     debug: Config.debug,

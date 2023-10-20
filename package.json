@@ -50,7 +50,7 @@
     "@hapi/good": "^9.0.1",
     "@hapi/good-console": "^9.0.1",
     "@hapi/good-squeeze": "^6.0.0",
-    "@hapi/hapi": "^20.3.0",
+    "@hapi/hapi": "^21.3.2",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
     "@hapipal/schmervice": "^3.0.0",

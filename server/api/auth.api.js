@@ -13,7 +13,7 @@ module.exports = {
   login: {
     validate: {
       payload: Joi.object().keys({
-        username: Joi.string().required().trim().label('Username'),
+        email: Joi.string().required().trim().label('Username'),
         password: Joi.string().required().trim().label('Password'),
       }),
     },
@@ -22,10 +22,12 @@ module.exports = {
         assign: 'user',
         method: async (request, h) => {
           try {
-            const username = request.payload.username;
+            const username = request.payload.email;
             const password = request.payload.password;
-
+          
+            
             let user = await User.findByCredentials(username, password);
+           
             if (user) {
               return user;
             } else {
@@ -64,7 +66,6 @@ module.exports = {
           } catch (err) {
             errorHelper.handleError(err);
           }
-
           return h.continue;
         },
       },
@@ -74,14 +75,18 @@ module.exports = {
       let response = {};
 
       delete request.pre.user.password;
+      delete request.pre.user.createdAt;
+      delete request.pre.user.role;
+      delete request.pre.user.updatedAt;
 
       response = {
         user: request.pre.user,
         accessToken,
+        expiresIn: config.constants.EXPIRATION_PERIOD,
       };
       return h.response(response).code(200);
     },
-  },
+  } ,
   signup: {
     validate: {
       payload: Joi.object().keys({

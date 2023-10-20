@@ -109,6 +109,8 @@ UserSchema.methods = {
   },
 };
 
+
+
 UserSchema.statics = {
   findByCredentials: async function (username, password) {
     try {
@@ -118,7 +120,7 @@ UserSchema.statics = {
         email: username.toLowerCase(),
       };
 
-      const emailValidate = Joi.validate(username, Joi.string().email());
+      const emailValidate = Joi.string().email().validate(username);
 
       if (emailValidate.error) {
         query = {
@@ -161,4 +163,4 @@ UserSchema.statics = {
   },
 };
 
-module.exports.schema = dbConn.collection(modelName, UserSchema);
+module.exports.schema = dbConn.model(modelName, UserSchema);
