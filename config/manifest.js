@@ -76,27 +76,27 @@ if (ENV !== PRODUCTION) {
   ]);
 }
 plugins = plugins.concat([
-  {
-    plugin: '@hapi/good',
-    options: {
-      ops: {
-        interval: 1000,
-      },
-      reporters: {
-        myConsoleReporter: [
-          {
-            module: '@hapi/good-squeeze',
-            name: 'Squeeze',
-            args: [{ log: '*', request: '*', response: '*', error: '*' }],
-          },
-          {
-            module: '@hapi/good-console',
-          },
-          'stdout',
-        ],
-      },
-    },
-  },
+  // {
+  //   plugin: '@hapi/good',
+  //   options: {
+  //     ops: {
+  //       interval: 1000,
+  //     },
+  //     reporters: {
+  //       myConsoleReporter: [
+  //         {
+  //           module: '@hapi/good-squeeze',
+  //           name: 'Squeeze',
+  //           args: [{ log: '*', request: '*', response: '*', error: '*' }],
+  //         },
+  //         {
+  //           module: '@hapi/good-console',
+  //         },
+  //         'stdout',
+  //       ],
+  //     },
+  //   },
+  // },
   {
     plugin: 'hapi-auth-jwt2',
   },

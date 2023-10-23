@@ -23,6 +23,13 @@ const startServer = async () => {
       server.registerService(require(`${process.cwd()}/${service}`));
     });
 
+    server.events.on('log',(event, tags) => {
+      console.log(event)
+      if (tags.error) {
+          console.log(`Server error: ${event.error ? event.error.message : 'unknown'}`);
+      }
+  });
+
     await server.start();
     console.log(`Server listening on ${server.info.uri}`);
   } catch (err) {
