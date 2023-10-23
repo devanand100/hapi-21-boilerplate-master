@@ -1,14 +1,13 @@
 'use strict';
 
+const chalk = import("chalk").then(m=>m.default);
+
 const logPolicy = async (request, h) => {
+  const logMessage = `${request.method.toUpperCase()} ${request.server.info.protocol}://${request.info.host}${request.path} ${request.response.output.statusCode}`;
   
-  // request.server.log(['policy', 'info'], 'Log come on pre response');
-  const currentUrl = request.url.href;
-  const currentPath = request.url.pathname;
-  const responseStatus = request.response;
+  console.log((await chalk).yellow(logMessage))
+  request.server.log("requestLog", logMessage);
 
-
-  request.server.log("requestLog", currentUrl +" "+ currentPath +" "+ responseStatus)
   return h.continue;
 };
 logPolicy.applyPoint = 'onPreResponse';
