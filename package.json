@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run start:local",
     "start:local": "cross-env NODE_ENV=default nodemon server.js",
-    "start:debug":"cross-env NODE_ENV=default nodemon --inspect  server.js",
+    "start:debug": "cross-env NODE_ENV=default nodemon --inspect  server.js",
     "start:dev": "cross-env NODE_ENV=development node server.js --development",
     "start:prod": "cross-env NODE_ENV=production node server.js --prod",
     "seed:local": "cross-env NODE_ENV=default md-seed run",
